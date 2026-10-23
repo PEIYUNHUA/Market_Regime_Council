@@ -3,7 +3,8 @@ __pycache__/
 .env
 logs/
 results/
-# full data files are not redistributed; keep only the format notes and samples
+# full data files are not redistributed; keep only the inventory, format notes and samples
 data/*
 !data/DATA_FORMAT.md
+!data/final_data_info.xlsx
 !data/samples/

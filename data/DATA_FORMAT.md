@@ -1,7 +1,8 @@
 # Data Format Reference
 
-This file describes every input the code reads. Short excerpts of most sources are in
-`data/samples/` to show the format. Paths below are relative to the repository root.
+This file describes every input the code reads: where it goes and its columns. Links and date
+ranges for each source are in `final_data_info.xlsx`, and short excerpts are in `samples/`. Paths
+below are relative to the repository root.
 
 | # | Source | Path | Used by |
 |---|---|---|---|
