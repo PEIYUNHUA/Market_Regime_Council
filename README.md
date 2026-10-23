@@ -161,12 +161,13 @@ MIT, see `LICENSE`.
 ## Citation
 
 ```bibtex
-@inproceedings{pei2026market,
-  title     = {Market Regime Council for Dynamic Credit Assignment in Multi-Agent {LLM} Decision Systems},
-  author    = {Pei, Yunhua and Ge, Zerui and Zheng, Jin and Cartlidge, John},
-  booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026},
-  eprint    = {2605.24490},
-  archivePrefix = {arXiv}
+@misc{pei2026marketregimecouncildynamic,
+      title={Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems}, 
+      author={Yunhua Pei and Zerui Ge and Jin Zheng and John Cartlidge},
+      year={2026},
+      eprint={2605.24490},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2605.24490}, 
 }
 ```
