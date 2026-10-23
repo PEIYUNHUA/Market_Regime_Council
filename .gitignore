@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.env
+logs/
+results/
+# full data files are not redistributed; keep only the format notes and samples
+data/*
+!data/DATA_FORMAT.md
+!data/samples/
