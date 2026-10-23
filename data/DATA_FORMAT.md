@@ -1,8 +1,7 @@
 # Data Format Reference
 
 This file describes every input the code reads. Short excerpts of most sources are in
-`data/samples/` to show the format. They are not enough to run a backtest. Paths below are
-relative to the repository root.
+`data/samples/` to show the format. Paths below are relative to the repository root.
 
 | # | Source | Path | Used by |
 |---|---|---|---|

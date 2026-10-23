@@ -1,11 +1,15 @@
 # Market Regime Council for Dynamic Credit Assignment in Multi-Agent LLM Decision Systems
 
 Code for the NeurIPS 2026 paper (poster) by Yunhua Pei, Zerui Ge, Jin Zheng and John Cartlidge.
-OpenReview: https://openreview.net/forum?id=xuhyMmn0D0
+Paper: https://arxiv.org/abs/2605.24490
 
 Market Regime Council (MRC) assigns credit across specialist LLM agents with exact Shapley values,
 computed online over all single, pairwise and grand-coalition portfolios, and turns that credit into
 agent weights for daily crypto portfolio decisions over 13 assets.
+
+![MRC framework](assets/framework.jpg)
+
+*The MRC mechanism with N=3 specialist agents for crypto portfolio management.*
 
 ---
 
@@ -15,6 +19,7 @@ agent weights for daily crypto portfolio decisions over 13 assets.
 .
 ├── run_backtest.py                 Entry point for all backtests
 ├── requirements.txt
+├── assets/framework.jpg            Framework figure from the paper
 ├── market_regime_council/
 │   ├── config.py                   Token universe and global settings
 │   ├── agents/                     Market (A1), on-chain (A2), macro (A3) observers and the Agent-4 readout
@@ -26,7 +31,7 @@ agent weights for daily crypto portfolio decisions over 13 assets.
 │   │   ├── metrics.py              Evaluation metrics
 │   │   └── result.py               Tables and plots
 │   ├── baselines/                  FinCon, TradingAgents, FinMem, CryptoTrade, FS-ReasoningAgent, A2C, PPO, DQN, MAPPO, MADDPG
-│   ├── data_layer/                 Readers for the five data sources and the DataManager
+│   ├── data_layer/                 Readers for every data source and the DataManager
 │   ├── llm/                        Ollama, OpenAI-compatible (vLLM / SGLang), remote API (OpenRouter etc.) and a MockLLM
 │   ├── portfolio/                  Weight-driven rebalancing and transaction costs
 │   └── prompts/templates.py        All agent prompts
@@ -56,14 +61,15 @@ pip install -r requirements.txt
 python run_backtest.py --mock --run-mode mrc --start 2023-03-01 --end 2023-03-20
 ```
 
-Without the data files this prints warnings about missing inputs and runs the full pipeline with
-placeholder values. It checks that the code runs end to end. It does not reproduce any result.
+Without the data files the run prints warnings about the missing inputs and completes the full
+pipeline with placeholder values, which confirms that the installation works.
 
 ## Data
 
-The raw data are not redistributed here because they come from third-party providers with their
-own terms of use. `data/DATA_FORMAT.md` documents every input, and `data/samples/` holds short
-excerpts of most of them. The excerpts are not enough to run a backtest.
+All inputs come from public providers: Binance, FRED, blockchain.com, alternative.me, Coin Metrics,
+BscScan, DefiLlama, Dune, Polymarket and X. The raw files are not redistributed here because of the
+providers' terms of use. `data/DATA_FORMAT.md` documents the source and schema of every input, and
+`data/samples/` shows the format of each file.
 
 Place the full files as follows (paths are relative to the repository root):
 
@@ -97,15 +103,14 @@ python run_backtest.py --run-mode mrc --model-name qwen3-vl:8b \
 ```
 
 Pass `--temperature 0.7` explicitly, because the command-line default is 0.9. `--seed 4` and
-`--smoothing-alpha 0.8` are the defaults and are shown only for completeness. Even with a fixed
-seed, LLM outputs can differ across hardware and library versions, so a rerun will not match the
-reported numbers exactly. This is why the paper reports the mean and standard deviation over five
+`--smoothing-alpha 0.8` are the defaults and are shown only for completeness. LLM sampling at
+temperature 0.7 is stochastic, so the paper reports the mean and standard deviation over five
 runs. On a single NVIDIA RTX 3090 one trading day took about 23 s (median), so a full 1,037-day
 run takes about 7 hours.
 
 If the LLM backend cannot be reached or rejects the request, the run does not stop. That day falls
 back to an equal-weight portfolio and the log shows `[Backtest] Council failed on <date>`. Check the
-log for this line before using any result.
+log for this line to make sure that every day was decided by the LLM council.
 
 Other backends. The backbone ablation in the paper's appendix ran the other Qwen3-VL variants
 through OpenRouter (`qwen/qwen3-vl-8b-instruct`, `qwen/qwen3-vl-8b-thinking`,
@@ -160,6 +165,8 @@ MIT, see `LICENSE`.
   title     = {Market Regime Council for Dynamic Credit Assignment in Multi-Agent {LLM} Decision Systems},
   author    = {Pei, Yunhua and Ge, Zerui and Zheng, Jin and Cartlidge, John},
   booktitle = {Advances in Neural Information Processing Systems},
-  year      = {2026}
+  year      = {2026},
+  eprint    = {2605.24490},
+  archivePrefix = {arXiv}
 }
 ```
